@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:observable_state/observable_state.dart';
+import 'package:startup_namer/state.dart';
 
 class TestApp extends StatefulWidget {
   @override
@@ -20,7 +22,6 @@ class TestAppState extends State<TestApp> {
         actions: <Widget>[new IconButton(icon: new Icon(Icons.search))],
       ),
       body: new Container(
-        // margin: const EdgeInsets.all(60.0),
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
         child: new Card(
             child: new Column(
@@ -43,16 +44,16 @@ class TestAppState extends State<TestApp> {
                 color: Colors.blue[500],
               ),
             ),
+            ObserverBuilder<MyState, Changes>(
+              changes: [
+                Changes.increment,
+              ],
+              builder: (context, state) {
+                return Text('${state.counter}');
+              },
+            )
           ],
         )),
-        // child: new Row(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: <Widget>[
-        //     new Icon(Icons.star, color: Colors.green),
-        //     new Icon(Icons.star, color: Colors.green),
-        //     new Icon(Icons.star, color: Colors.green)
-        //   ],
-        // ),
       ),
       // body: new Center(child: new CircularProgressIndicator()),
       floatingActionButton: new FloatingActionButton(
@@ -63,29 +64,3 @@ class TestAppState extends State<TestApp> {
     );
   }
 }
-
-// class MyAppBar extends StatelessWidget {
-//   MyAppBar({this.title});
-//   final Widget title;
-//   @override
-//   Widget build(BuildContext context) {
-//     return new Container(
-//       height: 100.0,
-//       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
-//       decoration: new BoxDecoration(color: Colors.blue[500]),
-//       child: new Row(
-//         children: <Widget>[
-//           new IconButton(
-//             icon: new Icon(Icons.menu),
-//           ),
-//           new Expanded(
-//             child: title,
-//           ),
-//           new IconButton(
-//             icon: new Icon(Icons.search),
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }

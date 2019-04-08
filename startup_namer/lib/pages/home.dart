@@ -77,8 +77,16 @@ class HomeState extends State<Home> {
               color: Colors.blue,
               textColor: Colors.white,
             ),
-            bindWidget<MyState>(
-                context, (context, state) => Text('${state.counter}')),
+            ObserverBuilder<MyState, Changes>(
+              changes: [
+                Changes.increment,
+              ],
+              builder: (context, state) {
+                return Text('${state.counter}');
+              },
+            )
+            // bindWidget<MyState>(
+            //     context, (context, state) => Text('${state.counter}')),
           ],
         ),
       ),
