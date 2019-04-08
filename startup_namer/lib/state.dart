@@ -9,7 +9,6 @@ class MyState extends Observable<Changes> {
   int get counter => _counter;
 
   void increment() {
-    print('----');
     setState(
       () => _counter++,
       notify: Changes.increment,

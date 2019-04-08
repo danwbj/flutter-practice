@@ -15,8 +15,10 @@ class MyApp extends StatelessWidget {
       state: MyState(),
       child: new MaterialApp(
         theme: new ThemeData(primaryColor: Colors.blue),
-        home: Home(),
+        // home: Home(),
+        initialRoute: '/',
         routes: <String, WidgetBuilder>{
+          '/': (context) => Home(),
           '/demo': (BuildContext context) => Demo(),
           '/testapp': (BuildContext context) => TestApp(),
           '/randomwords': (BuildContext context) => RandomWords(),
