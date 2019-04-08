@@ -5,10 +5,11 @@ enum Changes {
 }
 
 class MyState extends Observable<Changes> {
-  int _counter = 1;
+  int _counter = 0;
   int get counter => _counter;
 
   void increment() {
+    print('----');
     setState(
       () => _counter++,
       notify: Changes.increment,
