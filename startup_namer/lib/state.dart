@@ -5,7 +5,7 @@ enum Changes {
 }
 
 class MyState extends Observable<Changes> {
-  int _counter;
+  int _counter = 1;
   int get counter => _counter;
 
   void increment() {
