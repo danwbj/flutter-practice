@@ -13,7 +13,7 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     void _goHome() {
-      Navigator.pushNamed(context, '/demo');
+      Navigator.pushNamed(context, '/');
       // Navigator.push(context, MaterialPageRoute<void>(
       //   builder: (BuildContext context) {
       //     return Demo();
