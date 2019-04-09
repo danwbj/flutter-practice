@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:startup_namer/pages/demo.dart';
-import 'package:startup_namer/pages/testapp.dart';
-import 'package:startup_namer/pages/randomWords.dart';
 import 'package:observable_state/observable_state.dart';
 import 'package:startup_namer/state.dart';
-import 'package:startup_namer/routes.dart';
+import 'package:startup_namer/application.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -19,8 +16,9 @@ class HomeState extends StateObserver<Home, MyState, Changes> {
   @override
   Widget build(BuildContext context) {
     void _goDome() {
+      Application.router.navigateTo(context, "/demo");
       // Navigator.of(context).pushReplacementNamed(routeNameDemo);
-      Navigator.pushNamed(context, '/demo');
+      // Navigator.pushNamed(context, '/demo');
       // Navigator.push(context, MaterialPageRoute<void>(
       //   builder: (BuildContext context) {
       //     return Demo();
@@ -37,7 +35,8 @@ class HomeState extends StateObserver<Home, MyState, Changes> {
     }
 
     void _goTestApp() {
-      Navigator.pushNamed(context, '/testapp');
+      var result = 'TestApp';
+      Application.router.navigateTo(context, "/testapp?message=$result");
       // Navigator.of(context).push(
       //   new MaterialPageRoute(
       //     builder: (context) {

@@ -4,6 +4,8 @@ import 'package:observable_state/observable_state.dart';
 import 'package:startup_namer/state.dart';
 
 class TestApp extends StatefulWidget {
+  final String message;
+  TestApp({Key key, @required this.message}) : super(key: key);
   @override
   createState() => new TestAppState();
 }
@@ -13,12 +15,12 @@ class TestAppState extends State<TestApp> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('hello'),
-        leading: new IconButton(
-          icon: new Icon(Icons.menu),
-          tooltip: 'menu',
-          onPressed: () {},
-        ),
+        title: new Text(widget.message),
+        // leading: new IconButton(
+        //   icon: new Icon(Icons.menu),
+        //   tooltip: 'menu',
+        //   onPressed: () {},
+        // ),
         actions: <Widget>[new IconButton(icon: new Icon(Icons.search))],
       ),
       body: new Container(
