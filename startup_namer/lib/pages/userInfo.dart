@@ -1,6 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:observable_state/observable_state.dart';
+import 'package:startup_namer/service.dart';
 import 'package:startup_namer/state.dart';
 import 'package:startup_namer/application.dart';
 
@@ -13,11 +15,26 @@ class UserInfo extends StatefulWidget {
 
 // class UserInfoState extends State<UserInfo> {
 class UserInfoState extends StateObserver<UserInfo, MyState, Changes> {
-  bool _valueVoice = false;
+  bool _valueVoice = true;
   bool _valueAppMess = false;
 
   void _onChangedVoice(bool value) => setState(() => _valueVoice = value);
   void _onChangedAppMess(bool value) => setState(() => _valueAppMess = value);
+
+  void getData() async {
+    var res = await Services.getUserInfo();
+
+    print(res);
+    // print(res.then((a) => {print(a.data)}));
+    // print(res['data']);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
