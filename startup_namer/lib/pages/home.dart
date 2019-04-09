@@ -5,16 +5,21 @@ import 'package:startup_namer/pages/testapp.dart';
 import 'package:startup_namer/pages/randomWords.dart';
 import 'package:observable_state/observable_state.dart';
 import 'package:startup_namer/state.dart';
+import 'package:startup_namer/routes.dart';
 
 class Home extends StatefulWidget {
   @override
   createState() => new HomeState();
 }
 
-class HomeState extends State<Home> {
+// class HomeState extends State<Home> {
+class HomeState extends StateObserver<Home, MyState, Changes> {
+  @override
+  List<Changes> get changes => [Changes.increment];
   @override
   Widget build(BuildContext context) {
-    void _goHome() {
+    void _goDome() {
+      // Navigator.of(context).pushReplacementNamed(routeNameDemo);
       Navigator.pushNamed(context, '/demo');
       // Navigator.push(context, MaterialPageRoute<void>(
       //   builder: (BuildContext context) {
@@ -32,23 +37,25 @@ class HomeState extends State<Home> {
     }
 
     void _goTestApp() {
-      Navigator.of(context).push(
-        new MaterialPageRoute(
-          builder: (context) {
-            return new TestApp();
-          },
-        ),
-      );
+      Navigator.pushNamed(context, '/testapp');
+      // Navigator.of(context).push(
+      //   new MaterialPageRoute(
+      //     builder: (context) {
+      //       return new TestApp();
+      //     },
+      //   ),
+      // );
     }
 
     void _goRandomWords() {
-      Navigator.of(context).push(
-        new MaterialPageRoute(
-          builder: (context) {
-            return new RandomWords();
-          },
-        ),
-      );
+      Navigator.pushNamed(context, '/randomwords');
+      // Navigator.of(context).push(
+      //   new MaterialPageRoute(
+      //     builder: (context) {
+      //       return new RandomWords();
+      //     },
+      //   ),
+      // );
     }
 
     return new Scaffold(
@@ -60,7 +67,7 @@ class HomeState extends State<Home> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             RaisedButton(
-              onPressed: _goHome,
+              onPressed: _goDome,
               child: Text('Go Demo'),
               color: Colors.blue,
               textColor: Colors.white,
@@ -84,14 +91,18 @@ class HomeState extends State<Home> {
               builder: (context, state) {
                 return Text('${state.counter}');
               },
-            )
+            ),
+            Text('${state.counter}')
             // bindWidget<MyState>(
             //     context, (context, state) => Text('${state.counter}')),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: bind<MyState>(context, (state) => state.increment()),
+        onPressed: () {
+          state.increment();
+        },
+        // onPressed: bind<MyState>(context, (state) => state.increment()),
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
