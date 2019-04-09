@@ -57,6 +57,10 @@ class HomeState extends StateObserver<Home, MyState, Changes> {
       // );
     }
 
+    void _goUserInfo() {
+      Navigator.pushNamed(context, '/users/110');
+    }
+
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('home'),
@@ -78,11 +82,18 @@ class HomeState extends StateObserver<Home, MyState, Changes> {
               textColor: Colors.white,
             ),
             RaisedButton(
+              onPressed: _goUserInfo,
+              child: Text('Go UserInfo'),
+              color: Colors.blue,
+              textColor: Colors.white,
+            ),
+            RaisedButton(
               onPressed: _goRandomWords,
               child: Text('Go RandomWords'),
               color: Colors.blue,
               textColor: Colors.white,
             ),
+
             ObserverBuilder<MyState, Changes>(
               changes: [
                 Changes.increment,
