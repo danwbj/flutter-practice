@@ -21,12 +21,15 @@ class UserInfoState extends StateObserver<UserInfo, MyState, Changes> {
   void _onChangedVoice(bool value) => setState(() => _valueVoice = value);
   void _onChangedAppMess(bool value) => setState(() => _valueAppMess = value);
 
+  String _name = '';
+  String _account = '';
   void getData() async {
     var res = await Services.getUserInfo();
-
-    print(res);
+    setState(() {
+      _name = res.data['userProfile']['name'];
+      _account = res.data['userProfile']['account'];
+    });
     // print(res.then((a) => {print(a.data)}));
-    // print(res['data']);
   }
 
   @override
@@ -46,9 +49,9 @@ class UserInfoState extends StateObserver<UserInfo, MyState, Changes> {
           new Container(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
             child: new ListTile(
-              title: new Text('吴丹丹',
+              title: new Text(_name,
                   style: new TextStyle(fontWeight: FontWeight.w500)),
-              subtitle: new Text('danwbj@163.com'),
+              subtitle: new Text(_account),
               leading: CircleAvatar(
                 backgroundColor: Colors.brown.shade800,
                 backgroundImage: NetworkImage(
