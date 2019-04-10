@@ -13,21 +13,39 @@ class UserInfo extends StatefulWidget {
   createState() => new UserInfoState();
 }
 
+class User {
+  User({
+    String name,
+    String account,
+  })  : _name = name,
+        _account = account;
+
+  String _name;
+  String get name => _name;
+
+  String _account;
+  String get account => _account;
+}
+
 // class UserInfoState extends State<UserInfo> {
 class UserInfoState extends StateObserver<UserInfo, MyState, Changes> {
+  @override
+  List<Changes> get changes => [Changes.increment, Changes.getuserinfo];
   bool _valueVoice = true;
   bool _valueAppMess = false;
 
   void _onChangedVoice(bool value) => setState(() => _valueVoice = value);
   void _onChangedAppMess(bool value) => setState(() => _valueAppMess = value);
 
+  User _user;
   String _name = '';
   String _account = '';
   void getData() async {
     var res = await Services.getUserInfo();
     setState(() {
-      _name = res.data['userProfile']['name'];
-      _account = res.data['userProfile']['account'];
+      _user = User(
+          name: res.data['userProfile']['name'],
+          account: res.data['userProfile']['account']);
     });
     // print(res.then((a) => {print(a.data)}));
   }
@@ -35,11 +53,15 @@ class UserInfoState extends StateObserver<UserInfo, MyState, Changes> {
   @override
   void initState() {
     super.initState();
-    getData();
+    // print(state.user.account);
+    // getData();
+    // state.getUserInfo();
+    // Application.state.increment();
   }
 
   @override
   Widget build(BuildContext context) {
+    print(state.user);
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('我的'),
@@ -49,9 +71,9 @@ class UserInfoState extends StateObserver<UserInfo, MyState, Changes> {
           new Container(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
             child: new ListTile(
-              title: new Text(_name,
+              title: new Text(state.user != null ? state.user.name : '',
                   style: new TextStyle(fontWeight: FontWeight.w500)),
-              subtitle: new Text(_account),
+              subtitle: new Text(state.user != null ? state.user.account : ''),
               leading: CircleAvatar(
                 backgroundColor: Colors.brown.shade800,
                 backgroundImage: NetworkImage(
@@ -107,6 +129,14 @@ class UserInfoState extends StateObserver<UserInfo, MyState, Changes> {
                     print('logout');
                   },
                 ),
+                RaisedButton(
+                  onPressed: () {
+                    state.increment();
+                  },
+                  child: Text('${state.counter}'),
+                  color: Colors.blue,
+                  textColor: Colors.white,
+                )
               ],
             ),
           )

@@ -63,7 +63,7 @@ class HomeState extends StateObserver<Home, MyState, Changes> {
 
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('home'),
+        title: new Text('首页'),
       ),
       body: new Center(
         child: new Column(

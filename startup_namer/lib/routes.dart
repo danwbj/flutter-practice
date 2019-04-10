@@ -5,6 +5,7 @@ import 'pages/demo.dart';
 import 'pages/testapp.dart';
 import 'pages/randomWords.dart';
 import 'pages/userInfo.dart';
+import 'application.dart';
 
 var rootHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -29,6 +30,7 @@ var randomWordsRouteHandler = new Handler(
 
 var userInfoRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  Application.state.getUserInfo();
   String id = params["id"]?.first;
   return UserInfo(
     id: id,
@@ -55,6 +57,8 @@ class Routes {
     router.define(routeNameRandomWords,
         handler: randomWordsRouteHandler,
         transitionType: TransitionType.inFromRight);
-    router.define(routeNameUserInfo, handler: userInfoRouteHandler);
+    router.define(routeNameUserInfo,
+        handler: userInfoRouteHandler,
+        transitionType: TransitionType.inFromLeft);
   }
 }

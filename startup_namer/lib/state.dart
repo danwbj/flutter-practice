@@ -1,6 +1,19 @@
 import 'package:observable_state/observable_state.dart';
 import 'service.dart';
-import 'package:dio/dio.dart';
+
+class User {
+  User({
+    String name,
+    String account,
+  })  : _name = name,
+        _account = account;
+
+  String _name;
+  String get name => _name;
+
+  String _account;
+  String get account => _account;
+}
 
 enum Changes { increment, getuserinfo }
 
@@ -8,8 +21,14 @@ class MyState extends Observable<Changes> {
   int _counter = 0;
   int get counter => _counter;
 
-  Object _user = null;
-  Object get user => _user;
+  User _user;
+  User get user => _user;
+
+  String _name = '';
+  String get name => _name;
+
+  String _account = '';
+  String get account => _account;
 
   void increment() {
     setState(
@@ -18,17 +37,14 @@ class MyState extends Observable<Changes> {
     );
   }
 
-  void getUserInfo() async {
-    print('+++++');
-    // Dio dio = new Dio();
-    // Response response =
-    //     await dio.get("http://yapi.nasawz.com/mock/18/api/v1/users/current");
-    // print(response);
-
-    // // var res = await Services.getUserInfo();
-    // setState(() {
-    //   // print(res)
-    //   // _user = '${res.data['weather']['condition']}';
-    // }, notify: Changes.getuserinfo);
+  void getUserInfo() {
+    Services.getUserInfo().then((res) => {
+          setState(() {
+            _user = User(
+              name: res.data['userProfile']['name'],
+              account: res.data['userProfile']['account'],
+            );
+          }, notify: Changes.getuserinfo)
+        });
   }
 }
