@@ -61,6 +61,10 @@ class HomeState extends StateObserver<Home, MyState, Changes> {
       Navigator.pushNamed(context, '/users/110');
     }
 
+    void _goUserList() {
+      Navigator.pushNamed(context, '/user/list');
+    }
+
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('首页'),
@@ -84,6 +88,12 @@ class HomeState extends StateObserver<Home, MyState, Changes> {
             RaisedButton(
               onPressed: _goUserInfo,
               child: Text('Go UserInfo'),
+              color: Colors.blue,
+              textColor: Colors.white,
+            ),
+            RaisedButton(
+              onPressed: _goUserList,
+              child: Text('Go UserList'),
               color: Colors.blue,
               textColor: Colors.white,
             ),

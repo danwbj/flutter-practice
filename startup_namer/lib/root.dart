@@ -18,6 +18,7 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     final app = new MaterialApp(
       theme: new ThemeData(primaryColor: Colors.blue),
+      initialRoute: '/login',
       onGenerateRoute: Application.router.generator,
     );
     print("initial route = ${app.initialRoute}");

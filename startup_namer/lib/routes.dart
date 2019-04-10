@@ -6,6 +6,8 @@ import 'pages/testapp.dart';
 import 'pages/randomWords.dart';
 import 'pages/userInfo.dart';
 import 'application.dart';
+import 'pages/login.dart';
+import 'pages/list.dart';
 
 var rootHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -14,6 +16,10 @@ var rootHandler = new Handler(
 var demoRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return new Demo();
+});
+var loginRouteHandler = new Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return new Login();
 });
 var testAppRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -36,13 +42,19 @@ var userInfoRouteHandler = new Handler(
     id: id,
   );
 });
+var userListInfoRouteHandler = new Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return UserList();
+});
 
 class Routes {
   static String root = "/";
+  static String routeNameLogin = "/login";
   static String routeNameDemo = "/demo";
   static String routeNameTestApp = "/testapp";
   static String routeNameRandomWords = "/randomwords";
   static String routeNameUserInfo = '/users/:id';
+  static String routeNameUserList = '/user/list';
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -51,6 +63,7 @@ class Routes {
     });
     router.define(root, handler: rootHandler);
     router.define(routeNameDemo, handler: demoRouteHandler);
+    router.define(routeNameLogin, handler: loginRouteHandler);
     router.define(routeNameTestApp,
         handler: testAppRouteHandler,
         transitionType: TransitionType.inFromLeft);
@@ -59,6 +72,9 @@ class Routes {
         transitionType: TransitionType.inFromRight);
     router.define(routeNameUserInfo,
         handler: userInfoRouteHandler,
+        transitionType: TransitionType.inFromLeft);
+    router.define(routeNameUserList,
+        handler: userListInfoRouteHandler,
         transitionType: TransitionType.inFromLeft);
   }
 }

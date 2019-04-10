@@ -61,6 +61,7 @@ class UserInfoState extends StateObserver<UserInfo, MyState, Changes> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.id);
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('我的'),
@@ -131,19 +132,19 @@ class UserInfoState extends StateObserver<UserInfo, MyState, Changes> {
                       ),
                       Divider(),
                       ListTile(
-                        title: Text('推出登陆'),
+                        title: Text('退出登陆'),
                         onTap: () {
                           print('logout');
                         },
                       ),
-                      RaisedButton(
-                        onPressed: () {
-                          state.increment();
-                        },
-                        child: Text('${state.counter}'),
-                        color: Colors.blue,
-                        textColor: Colors.white,
-                      )
+                      // RaisedButton(
+                      //   onPressed: () {
+                      //     state.increment();
+                      //   },
+                      //   child: Text('${state.counter}'),
+                      //   color: Colors.blue,
+                      //   textColor: Colors.white,
+                      // )
                     ],
                   ),
                 )
