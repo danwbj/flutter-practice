@@ -30,7 +30,7 @@ var randomWordsRouteHandler = new Handler(
 
 var userInfoRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  Application.state.getUserInfo();
+  // Application.state.getUserInfo();
   String id = params["id"]?.first;
   return UserInfo(
     id: id,
