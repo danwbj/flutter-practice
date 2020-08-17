@@ -6,15 +6,47 @@ import 'application.dart';
 
 void main() => runApp(new MyApp());
 
-class MyApp extends StatelessWidget {
-  // Application.state = initState;
+// class MyApp extends StatelessWidget {
+//   // Application.state = initState;
+//   @override
+//   Widget build(BuildContext context) {
+//     final initState = MyState();
+//     Application.state = initState;
+//     return ObservableProvider(
+//       state: initState,
+//       child: Root(),
+//     );
+//   }
+// }
+
+// class MyApp extends StatelessWidget {
+//   // Application.state = initState;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: Text(
+//         'Hello, worldsddds!',
+//         textDirection: TextDirection.ltr,
+//       ),
+//     );
+//   }
+// }
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    final initState = MyState();
-    Application.state = initState;
-    return ObservableProvider(
-      state: initState,
-      child: Root(),
+    return Center(
+      child: Text(
+        'Hello, ddd!',
+        textDirection: TextDirection.ltr,
+      ),
     );
   }
 }
